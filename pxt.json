@@ -14,7 +14,9 @@
         "Controls.ts",
         "tilemap.g.jres",
         "tilemap.g.ts",
-        "Map.ts"
+        "Map.ts",
+        "GUI.ts",
+        "MusicImage.ts"
     ],
     "testFiles": [
         "test.ts"

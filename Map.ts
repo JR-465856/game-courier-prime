@@ -9,6 +9,7 @@ abstract class Map {
     private static grassKind = SpriteKind.create();
 
     public static getGrassKind() { return Map.grassKind;}
+    public static clearGrassEffects() { for (let i of Map.grassEffects) i.destroy();}
     public static main() {
         scene.setBackgroundImage(assets.image`level1background`);
         tiles.setTilemap(tilemap`level1`);
