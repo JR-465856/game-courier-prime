@@ -5,11 +5,12 @@ abstract class Map {
         assets.image`grass3`,
         assets.image`grass4`
     ];
-    public static grassEffects: Array<Sprite> = [];
+    public static mapEffects: Array<Sprite> = [];
     private static grassKind = SpriteKind.create();
+    private static waterKind = SpriteKind.create();
 
     public static getGrassKind() { return Map.grassKind;}
-    public static clearGrassEffects() { for (let i of Map.grassEffects) i.destroy();}
+    public static clearEffects() { for (let i of Map.mapEffects) i.destroy();}
     public static main() {
         scene.setBackgroundImage(assets.image`level1background`);
         tiles.setTilemap(tilemap`level1`);
@@ -21,9 +22,58 @@ abstract class Map {
                     Map.grassKind
                 );
                 tiles.placeOnTile(spr, tiles.getTileLocation(i.col, i.row - 1));
+                Map.mapEffects.push(spr);
             }
         }
-
+        /* Flowing water detail */
+        for (let i of tiles.getTilesByType(assets.tile`waterflow`)) {
+            let spr = sprites.create(img`
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+            `, Map.waterKind);
+            animation.runImageAnimation(spr, assets.animation`waterflowAnim`, 150, true);
+            tiles.placeOnTile(spr, i);
+            Map.mapEffects.push(spr);
+        }
+        /* Still water detail */
+        for (let i of tiles.getTilesByType(assets.tile`waterstill`)) {
+            let spr = sprites.create(img`
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+            `, Map.waterKind);
+            animation.runImageAnimation(spr, assets.animation`waterstillAnim`, 500, true);
+            tiles.placeOnTile(spr, i);
+            Map.mapEffects.push(spr);
+        }
+        
         /* Spawn player */
         Main.initCallback(function () {
             tiles.placeOnRandomTile(Main.plr, assets.tile`plrspawn`);

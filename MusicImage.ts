@@ -56,15 +56,12 @@ abstract class MusicImage {
             } else {
                 music.rest(music.beat(noteLength));
             }
-            console.logValue("Pitch", notePitch);
-            console.logValue("Length", inLen);
         }
     }
 
     public static main() {
         game.forever(function() {
             MusicImage.playImage(assets.image`music2`);
-            MusicImage.playImage(assets.image`music1`);
         });
     }
 }
