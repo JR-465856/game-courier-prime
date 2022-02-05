@@ -104,4 +104,3 @@ abstract class Main {
 
 /* Driver code */
 Main.main();
-music.playTone(Note., BeatFraction.Half)
