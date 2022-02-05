@@ -21,45 +21,49 @@ abstract class MusicImage {
     public static playImage(toplay: Image) {
         for (let cx = 0; cx < toplay.width; cx++) {
             // Get note to play
-            let np = 0;
-            for(let i = 0; i < 21; i++) {
+            let notePitch = 0;
+            for(let i = 0; i < 20; i++) {
                 let cp = toplay.getPixel(cx, i);
                 if (cp != 0) {
-                    np = 988-((20-i)*(857/20));
+                    notePitch = 988-(i*(857/20));
+                    break
                 }
             }
             // Get length of note
-            let nlp = toplay.getPixel(cx, 20);
-            let np;
-            switch(nlp) {
+            let inLen = toplay.getPixel(cx, 20);
+            let noteLength;
+            switch(inLen) {
                 case 1:
-                    nlp = BeatFraction.Sixteenth; break;
+                    noteLength = BeatFraction.Sixteenth; break;
                 case 2:
-                    nlp = BeatFraction.Eigth; break;
+                    noteLength = BeatFraction.Eighth; break;
                 case 3:
-                    nlp = BeatFraction.Quarter; break;
+                    noteLength = BeatFraction.Quarter; break;
                 case 4:
-                    nlp = BeatFraction.Triplet; break;
+                    noteLength = BeatFraction.Triplet; break;
                 case 5:
-                    nlp = BeatFraction.Half; break;
+                    noteLength = BeatFraction.Half; break;
                 case 6:
-                    nlp = BeatFraction.Whole; break;
+                    noteLength = BeatFraction.Whole; break;
                 case 7:
-                    nlp = BeatFraction.Double; break;
+                    noteLength = BeatFraction.Double; break;
                 case 8:
-                    nlp = BeatFraction.Breve; break;
+                    noteLength = BeatFraction.Breve; break;
             }
             // Play note
-            if (np == 0) {
-                music.playTone(np, nlp);
+            if (notePitch != 0) {
+                music.playTone(notePitch, music.beat(noteLength));
             } else {
-                music.rest(nlp);
+                music.rest(music.beat(noteLength));
             }
+            console.logValue("Pitch", notePitch);
+            console.logValue("Length", inLen);
         }
     }
 
     public static main() {
         game.forever(function() {
+            MusicImage.playImage(assets.image`music2`);
             MusicImage.playImage(assets.image`music1`);
         });
     }
