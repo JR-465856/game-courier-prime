@@ -1,4 +1,8 @@
  # Courier Prime
+| ![arcade-Courier-Prime](https://user-images.githubusercontent.com/49529648/152655061-72a1a339-0b71-4817-9b46-ab5bea41e461.png) |
+| :--: |
+| **Courier Prime v1.1.0** |
+
 Courier Prime is a game which recreates the scale of World of Revertia, but in TypeScript. The game World of Revertia contained gameplay above the expectations of its players, but it had its quirks, such as bugs and the laggy experience of those editing the block code of the game. Courier Prime is a development exercise for fun that simultaneously is a game which undoes some of the injustices of World of Revertia.
 
 Courier Prime in its gameplay is planned to be similar to the gameplay of World of Revertia.
