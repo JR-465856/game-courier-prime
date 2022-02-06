@@ -75,8 +75,8 @@ abstract class Map {
         }
         
         /* Spawn player */
-        Main.initCallback(function () {
-            tiles.placeOnRandomTile(Main.plr, assets.tile`plrspawn`);
+        Player.initCallback(function () {
+            tiles.placeOnRandomTile(Player.getPlayerSprite(), assets.tile`plrspawn`);
             tiles.setTileAt(tiles.getRandomTileByType(assets.tile`plrspawn`), assets.tile`transparency16`);
         })
     }

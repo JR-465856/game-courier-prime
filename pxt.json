@@ -17,7 +17,9 @@
         "tilemap.g.ts",
         "Map.ts",
         "GUI.ts",
-        "MusicImage.ts"
+        "MusicImage.ts",
+        "Player.ts",
+        "Camera.ts"
     ],
     "testFiles": [
         "test.ts"
