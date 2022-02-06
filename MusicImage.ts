@@ -1,11 +1,13 @@
 /*
- Write and play music with images
- Images must be 21 pixels in height
- Notes are automatically scaled from 131 to 988,
+  Write and play music with images
+  Images must be at least 2 pixels in height
+  Notes are automatically scaled from 131 to 988,
 meaning that images 3 pixels in height will can
 either play notes of pitch 988 (highest pixels)
-or notes of potch 131 (lowest pixels)
- Lowest row of the image holds the length of
+or notes of pitch 131 (lowest pixels)
+  Scale is an integer that is the height of the
+image minus one
+  Lowest row of the image holds the length of
 the note by a color:
   1. 1/16
   2. 1/8
@@ -18,19 +20,19 @@ the note by a color:
 */
 
 abstract class MusicImage {
-    public static playImage(toplay: Image) {
+    public static playImage(toplay: Image, scale: number) {
         for (let cx = 0; cx < toplay.width; cx++) {
             // Get note to play
             let notePitch = 0;
-            for(let i = 0; i < 20; i++) {
+            for (let i = 0; i < scale; i++) {
                 let cp = toplay.getPixel(cx, i);
                 if (cp != 0) {
-                    notePitch = 988-(i*(857/20));
+                    notePitch = 988-(i*(857/scale));
                     break
                 }
             }
             // Get length of note
-            let inLen = toplay.getPixel(cx, 20);
+            let inLen = toplay.getPixel(cx, scale);
             let noteLength;
             switch(inLen) {
                 case 1:
@@ -61,7 +63,7 @@ abstract class MusicImage {
 
     public static main() {
         game.forever(function() {
-            MusicImage.playImage(assets.image`music2`);
+            MusicImage.playImage(assets.image`music2`, 20);
         });
     }
 }
