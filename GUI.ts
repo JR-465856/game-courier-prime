@@ -28,7 +28,7 @@ class GUI {
             game.onPaint(function() {
                 if (game.runtime() < 1300)
                     screen.printCenter(
-                        "Courier Prime".substr(0, game.runtime()/100),
+                        "Courier Prime".substr(0, game.runtime() / 100),
                         5, 1, image.font8);
                 if (game.runtime() >= 1300 && game.runtime() <= 5000)
                     screen.printCenter(
