@@ -24,6 +24,22 @@ class GUI {
 
     public static main() {
         Player.initCallback(function() {
+            /* Title print */
+            game.onPaint(function() {
+                if (game.runtime() < 1300)
+                    screen.printCenter(
+                        "Courier Prime".substr(0, game.runtime()/100),
+                        5, 1, image.font8);
+                if (game.runtime() >= 1300 && game.runtime() <= 5000)
+                    screen.printCenter(
+                        "Courier Prime",
+                        5, 1, image.font8);
+                if (game.runtime() > 5000 && game.runtime() < 6300)
+                    screen.printCenter(
+                        "Courier Prime".substr(0, 63 - game.runtime() / 100),
+                        5, 1, image.font8);
+            })
+            /* Controls */
             let controlsGUI = new GUI();
             controlsGUI.setImage(img`
             .66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666.

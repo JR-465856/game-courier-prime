@@ -1,6 +1,5 @@
 /* ***     Main class     *** */
 abstract class Main {
-
     public static main() {
         
     }
