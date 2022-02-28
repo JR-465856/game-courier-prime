@@ -24,8 +24,9 @@ class GUI {
 
     public static main() {
         Player.initCallback(function() {
-            /* Title print */
+            /* Intro print */
             game.onPaint(function() {
+                /* Title */
                 if (game.runtime() < 1300)
                     screen.printCenter(
                         "Courier Prime".substr(0, game.runtime() / 100),
