@@ -9,9 +9,19 @@ abstract class Map {
     private static grassKind       = SpriteKind.create();
     private static waterKind       = SpriteKind.create();
     private static levelPortalKind = SpriteKind.create();
+    private static currentLevel = 1;
+
+    public static setLevel(newLevel: number) { Map.currentLevel = newLevel;}
+    public static getLevel() { return Map.currentLevel;}
 
     public static getGrassKind() { return Map.grassKind;}
     public static clearEffects() { for (let i of Map.mapEffects) i.destroy();}
+    
+    /* Spawn player */
+    public static spawnPlayer(tileReplace: Image) {
+        tiles.placeOnRandomTile(Player.getPlayerSprite(), assets.tile`plrspawn`);
+        tiles.setTileAt(tiles.getRandomTileByType(assets.tile`plrspawn`), tileReplace);
+    }
 
     /* Create effects */
     public static createEffects() {
@@ -83,16 +93,16 @@ abstract class Map {
         Map.createEffects();
 
         /* Spawn player */
-        tiles.placeOnRandomTile(Player.getPlayerSprite(), assets.tile`plrspawn`);
-        tiles.setTileAt(tiles.getRandomTileByType(assets.tile`plrspawn`), assets.tile`transparency16`);
+        Map.spawnPlayer(assets.tile`transparency16`);
         /* Level portal */
         let level1Portal = new Map.Portal();
         level1Portal.placeOnTileOfImage(assets.tile`levelPortal`, true);
-        // level1Portal.runOnActivation(Player.getPlayerSpriteKind(), function (spriteTouched: Sprite, portalSprite: Sprite) {
-        //     /* Go to level 2 */
-        //     Map.clearEffects();
-        //     Map.level2();
-        // });
+        level1Portal.runOnActivation(Player.getPlayerSpriteKind(), function (spriteTouched: Sprite, portalSprite: Sprite) {
+             /* Go to level 2 */
+             Map.clearEffects();
+             Map.level2();
+             Map.setLevel(2);
+        });
     }
 
     /* Level 2 */
@@ -101,10 +111,23 @@ abstract class Map {
         tiles.setTilemap(tilemap`level2`);
         Map.createEffects();
 
-        
+        /* Spawn player */
+        Map.spawnPlayer(assets.tile`postofficefrontwallback`);
+
+        /* Scripted stairs */
+
+        scene.onOverlapTile(Player.getPlayerSpriteKind(), assets.tile`postofficeinteriorscriptedstairsbottom`, function(plrSprite: Sprite, stairsLocation: tiles.Location) {
+            /* Find the top of the stairs */
+            for (let i = stairsLocation.row; i >= 0; i--) {
+                let testedLocation = tiles.getTileLocation(stairsLocation.column, i);
+                if (tiles.tileAtLocationEquals(testedLocation, assets.tile`postofficeinteriorscriptedstairstop`))
+                    tiles.placeOnTile(plrSprite, testedLocation);
+            }
+        })
     }
 }
 
+/* Extra exports */
 namespace Map {
     /* Portal objects */
     export class Portal {
@@ -139,7 +162,7 @@ namespace Map {
     }
 }
 
-/* Drive code */
+/* Driver code */
 Player.initCallback(function() {
     Map.level1();
 })

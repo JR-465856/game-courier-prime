@@ -36,6 +36,20 @@ namespace myTiles {
     export const tile16 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile17 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile18 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile21 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile22 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile20 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile19 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile23 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile24 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -59,7 +73,7 @@ namespace myTiles {
 22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 `, [myTiles.transparency16,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile9,myTiles.tile10,myTiles.tile8,myTiles.tile11,myTiles.tile12,myTiles.tile13,myTiles.tile14,myTiles.tile15,myTiles.tile16,myTiles.tile17], TileScale.Sixteen);
             case "level2":
-            case "level2":return tiles.createTilemap(hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, img`
+            case "level2":return tiles.createTilemap(hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020202020202020202020202020202020505050505050505050505050505050505050505050505050505050505050505050505000000000000000000050505050505060000000000000000000606060505050600000000000000000006060605050505070707070707070707050509050202020202020202020202020202020202050505050505050505050505050202020505060505060505060505050502020301050605050605050605050505080204040404040404040404040404040404`, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -71,12 +85,12 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16], TileScale.Sixteen);
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 . . . . . . . . . . . . . 2 2 
+2 . . . . . . . . . . . . . 2 2 
+2 . . . . . . . . . . . . . . 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+`, [myTiles.transparency16,myTiles.tile4,myTiles.tile11,myTiles.tile13,myTiles.tile18,myTiles.tile19,myTiles.tile21,myTiles.tile20,myTiles.tile23,myTiles.tile24], TileScale.Sixteen);
         }
         return null;
     })
@@ -118,6 +132,20 @@ namespace myTiles {
             case "tile16":return tile16;
             case "postofficefrontpillar":
             case "tile17":return tile17;
+            case "postofficeinteriorfloorcheckers":
+            case "tile18":return tile18;
+            case "postofficefrontwindowtransparentback":
+            case "tile21":return tile21;
+            case "postofficestairs":
+            case "tile22":return tile22;
+            case "postofficeinteriorguardrail":
+            case "tile20":return tile20;
+            case "postofficefrontwallback":
+            case "tile19":return tile19;
+            case "postofficeinteriorscriptedstairsbottom":
+            case "tile23":return tile23;
+            case "postofficeinteriorscriptedstairstop":
+            case "tile24":return tile24;
         }
         return null;
     })
