@@ -12,6 +12,7 @@ abstract class Player {
     public static isInitialized() { return Player.init;}
 
     public static getPlayerSprite() { return Player.playerSprite;}
+    public static getPlayerSpriteKind() { return Player.playerKind;}
 
     public static main() {
         Player.playerSprite = sprites.create(assets.image`plrfront`, Player.playerKind);

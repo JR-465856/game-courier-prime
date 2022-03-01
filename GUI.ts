@@ -24,8 +24,10 @@ class GUI {
 
     public static main() {
         Player.initCallback(function() {
-            /* Title print */
+            /* Game print */
             game.onPaint(function() {
+                console.log(game.runtime())
+                /* Title */
                 if (game.runtime() < 1300)
                     screen.printCenter(
                         "Courier Prime".substr(0, game.runtime() / 100),
@@ -39,19 +41,21 @@ class GUI {
                         "Courier Prime".substr(0, 63 - game.runtime() / 100),
                         5, 1, image.font8);
 
-                if (game.runtime() >= 6300 && game.runtime() < 8500)
+                if (game.runtime() >= 6300 && game.runtime() < 8400)
                     screen.printCenter(
-                        "Get to the post office".substr(0, game.runtime() / 100 - 63),
+                        "Get to the laboratory".substr(0, game.runtime() / 100 - 63),
                         5, 10, image.font8);
-                if (game.runtime() >= 8500 && game.runtime() < 12200)
+                if (game.runtime() >= 8400 && game.runtime() < 12100)
                     screen.printCenter(
-                        "Get to the post office",
+                        "Get to the laboratory",
                         5, 10, image.font8);
-                if (game.runtime() > 12200 && game.runtime() < 14400)
+                if (game.runtime() > 12100 && game.runtime() < 14300)
                     screen.printCenter(
-                        "Get to the post office".substr(0, 144 - game.runtime() / 100),
+                        "Get to the laboratory".substr(0, 144 - game.runtime() / 100),
                         5, 10, image.font8);
             })
+
+
             /* Controls */
             let controlsGUI = new GUI();
             controlsGUI.setImage(img`
