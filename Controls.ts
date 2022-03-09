@@ -4,6 +4,8 @@ abstract class Controls {
     public static down  = {pressed: false};
     public static left  = {pressed: false};
     public static right = {pressed: false};
+    public static A = { pressed: false};
+    public static B = { pressed: false};
     /* Button listeners*/
     private static buttonListeners: Array<{button: Controls.Button, mode: Controls.ButtonMode, callback: () => void}> = [];
     /* Other */
@@ -16,6 +18,8 @@ abstract class Controls {
         Controls.down.pressed  = false;
         Controls.left.pressed  = false;
         Controls.right.pressed = false;
+        Controls.A.pressed = false;
+        Controls.B.pressed = false;
     }
 
     /* Any movement pressed */
@@ -25,6 +29,9 @@ abstract class Controls {
                || Controls.left.pressed
                || Controls.right.pressed;
     }
+    /* A/B pressed*/
+    public static APressed() { return Controls.A.pressed;}
+    public static BPressed() { return Controls.B.pressed; }
     /* Any horizontal movement pressed */
     public static horizontalPressed() { return Controls.left.pressed || Controls.right.pressed;}
     /* Any vertical movement pressed */
@@ -72,6 +79,22 @@ abstract class Controls {
                     obj.callback();
             })
         })
+        /* A */ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+            Controls.A.pressed = true;
+            Controls.buttonListeners.forEach(function (obj) {
+                if (obj.button == Controls.Button.A
+                    && obj.mode == Controls.ButtonMode.press)
+                    obj.callback();
+            })
+        })
+        /* B */ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+            Controls.B.pressed = true;
+            Controls.buttonListeners.forEach(function (obj) {
+                if (obj.button == Controls.Button.B
+                    && obj.mode == Controls.ButtonMode.press)
+                    obj.callback();
+            })
+        })
 
 
                             /****************/
@@ -103,6 +126,22 @@ abstract class Controls {
                     obj.callback();
             })
         })
+        /* A */ controller.A.onEvent(ControllerButtonEvent.Released, function () {
+            Controls.A.pressed = false;
+            Controls.buttonListeners.forEach(function (obj) {
+                if (obj.button == Controls.Button.A
+                    && obj.mode == Controls.ButtonMode.release)
+                    obj.callback();
+            })
+        })
+        /* B */ controller.B.onEvent(ControllerButtonEvent.Released, function () {
+            Controls.B.pressed = false;
+            Controls.buttonListeners.forEach(function (obj) {
+                if (obj.button == Controls.Button.B
+                    && obj.mode == Controls.ButtonMode.release)
+                    obj.callback();
+            })
+        })
 
     }
 }
@@ -114,7 +153,9 @@ namespace Controls {
         down  = 0,
         up    = 1,
         right = 2,
-        left  = 3
+        left  = 3,
+        A = 4,
+        B = 5
     }
     /* Modes enum */
     export enum ButtonMode {

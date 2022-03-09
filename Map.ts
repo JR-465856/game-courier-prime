@@ -97,6 +97,7 @@ abstract class InternalMap {
         /* Level portal */
         let level1Portal = new InternalMap.Portal();
         level1Portal.placeOnTileOfImage(assets.tile`levelPortal`, true);
+        tiles.setTileAt(level1Portal.getPortalLocation(), assets.tile`postofficefrontdoor`);
         level1Portal.runOnActivation(Player.getPlayerSpriteKind(), function (spriteTouched: Sprite, portalSprite: Sprite) {
             /* Go to level 2 */
             InternalMap.clearEffects();
@@ -112,17 +113,30 @@ abstract class InternalMap {
         InternalMap.createEffects();
 
         /* Spawn player */
-        InternalMap.spawnPlayer(assets.tile`postofficefrontwallback`);
+        InternalMap.spawnPlayer(assets.tile`postofficefrontdoor`);
 
         /* Scripted stairs */
-        scene.onOverlapTile(Player.getPlayerSpriteKind(), assets.tile`postofficeinteriorscriptedstairsbottom`, function(plrSprite: Sprite, stairsLocation: tiles.Location) {
+        Controls.listen(Controls.Button.A, Controls.ButtonMode.press, function() {
+            /* Variables */
+            let plrSprite = Player.getPlayerSprite();
+            let stairsLocation = plrSprite.tilemapLocation();
             /* Find the top of the stairs */
-            for (let i = stairsLocation.row; i >= 0; i--) {
-                let testedLocation = tiles.getTileLocation(stairsLocation.column, i);
-                if (tiles.tileAtLocationEquals(testedLocation, assets.tile`postofficeinteriorscriptedstairstop`))
-                    tiles.placeOnTile(plrSprite, testedLocation);
+            if (tiles.tileAtLocationEquals(stairsLocation, assets.tile`postofficeinteriorscriptedstairsbottom`)) {
+                for (let i = stairsLocation.row; i >= 0; i--) {
+                    let testedLocation = tiles.getTileLocation(stairsLocation.column, i);
+                    if (tiles.tileAtLocationEquals(testedLocation, assets.tile`postofficeinteriorscriptedstairstop`))
+                        tiles.placeOnTile(plrSprite, testedLocation);
+                }
             }
-        })
+            /* Find the bottom of the stairs */
+            if (tiles.tileAtLocationEquals(stairsLocation, assets.tile`postofficeinteriorscriptedstairstop`)) {
+                for (let i = stairsLocation.row; i <= 1000; i++) {
+                    let testedLocation = tiles.getTileLocation(stairsLocation.column, i);
+                    if (tiles.tileAtLocationEquals(testedLocation, assets.tile`postofficeinteriorscriptedstairsbottom`))
+                        tiles.placeOnTile(plrSprite, testedLocation);
+                }
+            }
+        });
     }
 }
 
@@ -147,6 +161,7 @@ namespace InternalMap {
 
         /* Placement */
         public setPortalLocation(newloc: tiles.Location) { tiles.placeOnTile(this.spr, newloc);}
+        public getPortalLocation() { return this.spr.tilemapLocation();}
         public placeOnTileOfImage(tileImage: Image, removeTile: boolean) {
             tiles.placeOnRandomTile(this.spr, tileImage);
             if (removeTile) {
@@ -155,7 +170,7 @@ namespace InternalMap {
         }
 
         /* Callbacks */
-        public runOnActivation(otherKind: number, newfunc: (spriteTouched: Sprite, portalSprite: Sprite) => void) {
+        public runOnActivation(otherKind: number, newfunc: (sprite: Sprite, portalSprite: Sprite) => void) {
             sprites.onOverlap(otherKind, this.sprKind, newfunc);
         }
     }
