@@ -1,34 +1,53 @@
-abstract class Camera {
-    private static init = false;
+class Camera {
+    /* Variables */
+    private static currentCamera: Camera;
+    private init = false;
+    
     private static camKind = SpriteKind.create();
-    private static camSprite = sprites.create(img`
-        .
-    `, Camera.camKind);
+    private camSprite = sprites.create(image.create(1, 1), Camera.camKind);
+    /* ********* */
 
-    public static initCallback(toAdd: () => void) {
+    /* Constructor */
+    constructor() {
+        this.camSprite.setFlag(SpriteFlag.Ghost, true);
+        this.init = true;
+    }
+
+    /* Initialization callbacks */
+    public initCallback(toAdd: () => void) {
         control.runInParallel(function () {
-            pauseUntil(function () { return Camera.init;});
+            pauseUntil(function() { return this.init;});
             toAdd();
         });
     }
-    public static isInitialized() { return Camera.init;}
+    public isInitialized() { return this.init;}
 
-    public static getCameraSprite() { return Camera.camSprite;}
+    /* Focus on camera */
+    public focus() { scene.cameraFollowSprite(this.camSprite); Camera.currentCamera = this;}
+    /* Get focused camera */
+    public static getFocusedCamera() { return Camera.currentCamera;}
 
-    public static main() {
-        Camera.camSprite = new Sprite(image.create(1, 1));
-        Camera.camSprite.setFlag(SpriteFlag.Ghost, true);
-        Player.initCallback(function () {
-            Camera.camSprite.x = Player.getPlayerSprite().x;
-            Camera.camSprite.y = Player.getPlayerSprite().y;
-            game.onUpdateInterval(25, function () {
-                Camera.camSprite.x += (Player.getPlayerSprite().x - Camera.camSprite.x) / 5;
-                Camera.camSprite.y += (Player.getPlayerSprite().y - Camera.camSprite.y) / 5;
-            })
-            scene.cameraFollowSprite(Camera.camSprite);
+    /* Set position */
+    public setPosition(nx: number, ny: number) { this.camSprite.setPosition(nx, ny);}
+    /* Get position */
+    public getPosition() {}
 
-            Camera.init = true;
+    /* Get camera sprite */
+    public getCameraSprite() { return this.camSprite;}
+
+    /* Smooth follow a sprite */
+    public followSprite(toFollow: Sprite) {
+        this.camSprite.x = toFollow.x;
+        this.camSprite.y = toFollow.y;
+        game.onUpdateInterval(25, function () {
+            this.camSprite.x += (toFollow.x - this.camSprite.x) / 5;
+            this.camSprite.y += (toFollow.y - this.camSprite.y) / 5;
         })
+    }
+
+    /* ** Main method ** */
+    public static main() {
+        
     }
 }
 

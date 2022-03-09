@@ -26,7 +26,6 @@ class GUI {
         Player.initCallback(function() {
             /* Game print */
             game.onPaint(function() {
-                console.log(game.runtime())
                 /* Title */
                 if (game.runtime() < 1300)
                     screen.printCenter(
