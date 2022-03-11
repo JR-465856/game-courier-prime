@@ -21,7 +21,8 @@
         "Player.ts",
         "Camera.ts",
         "Movement.ts",
-        "GameMap.ts"
+        "GameMap.ts",
+        "NPC.ts"
     ],
     "testFiles": [
         "test.ts"
