@@ -190,7 +190,7 @@ namespace myTiles {
             case "tile25":return tile25;
             case "postofficeinteriorwalkway":
             case "tile26":return tile26;
-            case "spawn_l2_Zombie":
+            case "spawn_brimnem":
             case "tile27":return tile27;
         }
         return null;

@@ -137,6 +137,16 @@ abstract class InternalMap {
                 }
             }
         });
+
+        /* Spawn brimnem */
+        for (let i = 0; i < 5; i++) {
+            let brimnem = new Brimnem();
+            tiles.placeOnRandomTile(brimnem.getHitbox().getSprite(), assets.tile`spawn_brimnem`);
+        }
+        /* Delete brimnem spawns */
+        tiles.getTilesByType(assets.tile`spawn_brimnem`).forEach(function(location) {
+            tiles.setTileAt(location, assets.tile`transparency16`)
+        })
     }
 }
 

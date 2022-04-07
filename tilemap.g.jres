@@ -161,10 +161,10 @@
         "displayName": "postofficeinteriorwalkway"
     },
     "tile27": {
-        "data": "hwQQABAAAAAAAAAAAAAAABAAARAAAQABAAEBEAABEAAiAgIAAAAAAAICAiAiIgAAAiICICIiIiIAACLyIv8iIgAAIvLy8gIAAAAi8i/yIiJIYgQgIiIiIiYkAiAiIgAAREIJAAAAAAAAAQEQAAEQABAAARAAAQABAAAAAAAAAAAAAAAAAAAAAA==",
+        "data": "hwQQABAAAAAAAAAAAAAAABAAARAAAQABAAEBEAABEAAiAgIAAAAAAAICAiAiIgAAAiICICIiIiIAACJCWv8iIgAAIvL1+gIAAAAiol/1IiJIYgQgIiIiIiYkAiAiIgAAREIJAAAAAAAAAQEQAAEQABAAARAAAQABAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
-        "displayName": "spawn_l2_Zombie"
+        "displayName": "spawn_brimnem"
     },
     "level1": {
         "id": "level1",
