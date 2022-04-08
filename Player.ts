@@ -21,6 +21,7 @@ abstract class Player {
     public static getPlayerSpriteKind() { return Player.playerKind;}
 
     public static getEntity() { return Player.playerEntity;}
+    public static getHitboxKind() { return Player.playerEntity.getHitbox().getSprite().kind();}
 
     public static main() {
         /* Player init */
@@ -45,8 +46,9 @@ namespace Player {
         constructor() {
             super();
 
-            this.createSprite(assets.image`plrfront`, Player.getPlayerSpriteKind(), 12, 15);
+            this.createSprite(assets.image`plrfront`, Player.getPlayerSpriteKind(), 10, 15);
             this.getHitbox().getSprite().ay = 150;
+            this.getHitbox().setParentOffset(0, 0);
 
             // Walking animation
             let walkAnim = this.createAnimation("walk");

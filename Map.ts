@@ -98,7 +98,7 @@ abstract class InternalMap {
         let level1Portal = new InternalMap.Portal();
         level1Portal.placeOnTileOfImage(assets.tile`levelPortal`, true);
         tiles.setTileAt(level1Portal.getPortalLocation(), assets.tile`postofficefrontdoor`);
-        level1Portal.runOnActivation(Player.getPlayerSpriteKind(), function (spriteTouched: Sprite, portalSprite: Sprite) {
+        level1Portal.runOnActivation(Player.getHitboxKind(), function (spriteTouched: Sprite, portalSprite: Sprite) {
             /* Go to level 2 */
             InternalMap.clearEffects();
             InternalMap.level2();
