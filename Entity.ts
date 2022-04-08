@@ -8,9 +8,12 @@ abstract class Entity {
     protected doTick = false; // By default does not tick
     protected tickAge = 0;
 
-    public static entityList: Array<Entity> = [];
+    public static entityList: Array<Entity>;
 
-    constructor() { }
+    constructor() {
+        if (Entity.entityList == undefined) Entity.entityList = [];
+        Entity.entityList.push(this);
+    }
 
     //                          STATIC FUNCTIONS
     // Get entity by sprite
@@ -293,8 +296,8 @@ namespace Entity {
     }
 
     // Tick loops
-    game.onUpdate(function () { Hitbox.hitboxPositionLoop(); });
-    game.onUpdateInterval(50, function () { Entity.globalNPCTickLoop(); });
+    game.onUpdate(function() { Hitbox.hitboxPositionLoop();});
+    game.onUpdateInterval(50, function() { Entity.globalNPCTickLoop();});
 
     // Sprite kinds
     export const hitboxSpriteKind = SpriteKind.create();
@@ -326,7 +329,9 @@ class Brimnem extends Entity {
         idleAnim.play();
 
         // On tick
-        this.onTick(function (obj) {
+        this.setTicking(true);
+        this.onTick(function(obj) {
+            console.log("hello");
             this.castForEntity()
         })
 
