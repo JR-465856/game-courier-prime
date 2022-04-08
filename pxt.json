@@ -22,7 +22,7 @@
         "Camera.ts",
         "Movement.ts",
         "GameMap.ts",
-        "NPC.ts"
+        "Entity.ts"
     ],
     "testFiles": [
         "test.ts"

@@ -7,7 +7,7 @@ abstract class Movement {
 
         /* Left */
         Controls.listen(Controls.Button.left, Controls.ButtonMode.press, function() {
-            animation.runImageAnimation(Player.getPlayerSprite(), assets.animation`plrwalk`, 225, true);
+            Player.getEntity().getAnimation("walk").play();
             control.runInParallel(function () {
                 while (Controls.left.pressed && Controls.canMove) {
                     Player.getPlayerSprite().vx = -25;
@@ -17,7 +17,7 @@ abstract class Movement {
         })
         /* Right */
         Controls.listen(Controls.Button.right, Controls.ButtonMode.press, function () {
-            animation.runImageAnimation(Player.getPlayerSprite(), assets.animation`plrwalk`, 225, true);
+            Player.getEntity().getAnimation("walk").play();
             control.runInParallel(function () {
                 while (Controls.right.pressed && Controls.canMove) {
                     Player.getPlayerSprite().vx = 25;
@@ -38,7 +38,7 @@ abstract class Movement {
         Controls.listen(Controls.Button.left, Controls.ButtonMode.release, function () {
             if (Controls.canMove) Player.getPlayerSprite().vx = 0;
             if (!Controls.horizontalPressed()) {
-                animation.stopAnimation(animation.AnimationTypes.All, Player.getPlayerSprite());
+                Player.getEntity().stopAnimations();
                 if (Controls.canChangeImageOnStop)
                     Player.getPlayerSprite().setImage(assets.image`plrfront`);
             }
@@ -47,7 +47,7 @@ abstract class Movement {
         Controls.listen(Controls.Button.right, Controls.ButtonMode.release, function () {
             if (Controls.canMove) Player.getPlayerSprite().vx = 0;
             if (!Controls.horizontalPressed()) {
-                animation.stopAnimation(animation.AnimationTypes.All, Player.getPlayerSprite());
+                Player.getEntity().stopAnimations();
                 if (Controls.canChangeImageOnStop)
                     Player.getPlayerSprite().setImage(assets.image`plrfront`);
             }

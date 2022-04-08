@@ -19,7 +19,7 @@ abstract class InternalMap {
     
     /* Spawn player */
     public static spawnPlayer(tileReplace: Image) {
-        tiles.placeOnRandomTile(Player.getPlayerSprite(), assets.tile`plrspawn`);
+        tiles.placeOnRandomTile(Player.getEntity().getHitbox().getSprite(), assets.tile`plrspawn`);
         tiles.setTileAt(tiles.getRandomTileByType(assets.tile`plrspawn`), tileReplace);
     }
 
