@@ -19,7 +19,10 @@
         "GUI.ts",
         "MusicImage.ts",
         "Player.ts",
-        "Camera.ts"
+        "Camera.ts",
+        "Movement.ts",
+        "GameMap.ts",
+        "Entity.ts"
     ],
     "testFiles": [
         "test.ts"
