@@ -19,8 +19,21 @@ abstract class Entity {
     // Get entity by sprite
     public static getEntityBySprite(target: Sprite) {
         let result;
-        Entity.entityList.forEach(function (obj) {
-            if (obj.getSprite() == target) result = obj;
+        Entity.entityList.forEach(function(obj) {
+            if (obj.getSprite() == target) { result = obj; console.log(obj);}
+        });
+        return result;
+    }
+    // Get entity by hitbox sprite
+    // WARNING: 
+    public static getEntityByHitboxSprite(target: Sprite) {
+        let result;
+        Entity.Hitbox.hitboxList.forEach(function(obj) {
+            if (obj.getSprite() == target) {
+                Entity.entityList.forEach(function(entObj) {
+                    if (entObj.getHitbox() == obj) { result = entObj;}
+                })
+            }
         });
         return result;
     }
@@ -102,24 +115,32 @@ abstract class Entity {
 
     //                          CAST FUNCTIONS
     // Cast for entity
-    public castForEntity(angRad: number, ox: number, oy: number, maxDistance: number): any {
+    public castForEntity(angRad: number, ox: number, oy: number, maxDistance: number, filterFunc: (obj: Entity) => boolean): any {
         let sx = Math.cos(angRad); let sy = Math.sin(angRad);
         let ix = ox; let iy = oy;
-
         let castSprite = sprites.create(img`
-            f
+            5 5 5 5 5 5 5 5
+            5 5 5 5 5 5 5 5
+            5 5 5 5 5 5 5 5
+            5 5 5 5 5 5 5 5
+            5 5 5 5 5 5 5 5
+            5 5 5 5 5 5 5 5
+            5 5 5 5 5 5 5 5
+            5 5 5 5 5 5 5 5
         `, Entity.castSpriteKind);
         castSprite.setPosition(ox, oy);
         castSprite.setFlag(SpriteFlag.Invisible, true);
+        castSprite.startEffect(effects.trail);
 
         let found = false; let result; let resultDist = 0;
         for (let i = 1; i <= maxDistance; i++) {
             ix += sx; iy += sy;
             castSprite.setPosition(ix, iy);
-
-            Entity.Hitbox.hitboxList.forEach(function (obj) {
-                if (castSprite.overlapsWith(obj.getSprite())) {
-                    result = Entity.getEntityBySprite(obj.getParent());
+            Entity.Hitbox.hitboxList.forEach(function(obj) {
+                let foundEntity = Entity.getEntityByHitboxSprite(obj.getSprite());
+                // Filter function
+                if (castSprite.overlapsWith(obj.getSprite()) && filterFunc(foundEntity) && foundEntity != this) {
+                    result = foundEntity;
                     resultDist = i;
                     found = true;
                 }
@@ -331,8 +352,21 @@ class Brimnem extends Entity {
         // On tick
         this.setTicking(true);
         this.onTick(function(obj) {
-            console.log("hello");
-            this.castForEntity()
+            // Check if the player is in sight
+            if ((obj.getTickAge() % 40) == 0) {
+                // Cast for player
+                let foundEntity = obj.castForEntity(
+                    0 * (Math.PI / 180),
+                    obj.getPosition().x,
+                    obj.getPosition().y,
+                    80,
+                    function(obj) { if (obj == Player.getEntity()) {return true;} else {return false;}}
+                ).result;
+                
+                if (foundEntity == Player.getEntity()) {
+                    
+                }
+            }
         })
 
         return this;

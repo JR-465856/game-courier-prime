@@ -139,9 +139,10 @@ abstract class InternalMap {
         });
 
         /* Spawn brimnem */
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 3; i++) {
             let brimnem = new Brimnem();
             tiles.placeOnRandomTile(brimnem.getHitbox().getSprite(), assets.tile`spawn_brimnem`);
+            tiles.setTileAt(brimnem.getHitbox().getSprite().tilemapLocation(), assets.tile`transparency16`);
         }
         /* Delete brimnem spawns */
         tiles.getTilesByType(assets.tile`spawn_brimnem`).forEach(function(location) {
