@@ -333,6 +333,7 @@ namespace Entity {
 //                              LEVEL 2 ZOMBIE
 class Brimnem extends Entity {
     protected brimnemKind = SpriteKind.create();
+    protected targetFound = false;
 
     constructor() {
         super();
@@ -354,17 +355,40 @@ class Brimnem extends Entity {
         this.onTick(function(obj) {
             // Check if the player is in sight
             if ((obj.getTickAge() % 40) == 0) {
-                // Cast for player
-                let foundEntity = obj.castForEntity(
+                // Function for when the player has been found
+                let foundEntity = null;
+                let onPlayerFound = function() {
+                    if (!this.targetFound) {    // If the target has not been acquired
+                        this.targetFound = true;
+                        // Shake the camera
+                        scene.cameraShake(5, 1000);
+                        music.sonar.play()
+                    } else {                    // If the target has been acquired
+
+                    }
+                }
+
+                // Cast for player (right)
+                foundEntity = obj.castForEntity(
                     0 * (Math.PI / 180),
                     obj.getPosition().x,
                     obj.getPosition().y,
                     80,
                     function(obj) { if (obj == Player.getEntity()) {return true;} else {return false;}}
                 ).result;
-                
-                if (foundEntity == Player.getEntity()) {
-                    
+                if (foundEntity == Player.getEntity()) { onPlayerFound();} else {
+                    // Cast for player (left)
+                    foundEntity = obj.castForEntity(
+                        180 * (Math.PI / 180),
+                        obj.getPosition().x,
+                        obj.getPosition().y,
+                        80,
+                        function (obj) { if (obj == Player.getEntity()) { return true;} else { return false;}}
+                    ).result;
+                    if (foundEntity == Player.getEntity()) { onPlayerFound();} else if (this.targetFound) {
+                        // If target acquired before, stop aggression
+                        this.targetFound = false;
+                    }
                 }
             }
         })
