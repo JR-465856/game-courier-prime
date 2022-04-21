@@ -330,7 +330,7 @@ namespace Entity {
 
 
 
-//                              LEVEL 2 ZOMBIE
+//                              BRIMNEM
 class Brimnem extends Entity {
     protected brimnemKind = SpriteKind.create();
     protected targetFound = false;
@@ -349,6 +349,12 @@ class Brimnem extends Entity {
         idleAnim.setParent(this.getSprite());
         idleAnim.setFrames(assets.animation`brimnemAnimIdle`);
         idleAnim.play();
+        // Walk animation
+        let walkAnim = this.createAnimation("walk");
+        walkAnim.setInterval(100);
+        walkAnim.setLoop(true);
+        walkAnim.setParent(this.getSprite());
+        walkAnim.setFrames(assets.animation`brimnemAnimWalk`);
 
         // On tick
         this.setTicking(true);
