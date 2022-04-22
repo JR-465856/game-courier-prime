@@ -56,6 +56,18 @@ namespace myTiles {
     export const tile26 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile27 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile30 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile28 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile29 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile31 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile32 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile33 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -130,7 +142,7 @@ namespace myTiles {
 2.............222222..............................
 ...............22222..............................
 22222222222222222222..............................
-`, [myTiles.transparency16,myTiles.tile4,myTiles.tile11,myTiles.tile18,myTiles.tile19,myTiles.tile21,myTiles.tile20,myTiles.tile23,myTiles.tile24,myTiles.tile25,myTiles.tile15,myTiles.tile16,myTiles.tile17,myTiles.tile26,myTiles.tile27], TileScale.Sixteen);
+`, [myTiles.transparency16,myTiles.tile4,myTiles.tile11,myTiles.tile18,myTiles.tile19,myTiles.tile21,myTiles.tile20,myTiles.tile23,myTiles.tile24,myTiles.tile25,myTiles.tile15,myTiles.tile16,myTiles.tile17,myTiles.tile26,myTiles.tile27,myTiles.tile28,myTiles.tile29,myTiles.tile30], TileScale.Sixteen);
         }
         return null;
     })
@@ -192,6 +204,18 @@ namespace myTiles {
             case "tile26":return tile26;
             case "spawn_brimnem":
             case "tile27":return tile27;
+            case "RustedShelfEmpty":
+            case "tile30":return tile30;
+            case "RustedShelfRandom0":
+            case "tile28":return tile28;
+            case "RustedShelfItem4":
+            case "tile29":return tile29;
+            case "RustedShelfItem3":
+            case "tile31":return tile31;
+            case "RustedShelfItem1":
+            case "tile32":return tile32;
+            case "RustedShelfItem2":
+            case "tile33":return tile33;
         }
         return null;
     })

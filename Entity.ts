@@ -130,7 +130,7 @@ abstract class Entity {
         `, Entity.castSpriteKind);
         castSprite.setPosition(ox, oy);
         castSprite.setFlag(SpriteFlag.Invisible, true);
-        castSprite.startEffect(effects.trail);
+        // castSprite.startEffect(effects.trail);
 
         let found = false; let result; let resultDist = 0;
         for (let i = 1; i <= maxDistance; i++) {
@@ -360,17 +360,16 @@ class Brimnem extends Entity {
         this.setTicking(true);
         this.onTick(function(obj) {
             // Check if the player is in sight
-            if ((obj.getTickAge() % 40) == 0) {
+            if ((obj.getTickAge() % 20) == 0) {
                 // Function for when the player has been found
                 let foundEntity = null;
                 let onPlayerFound = function() {
                     if (!this.targetFound) {    // If the target has not been acquired
                         this.targetFound = true;
                         // Shake the camera
-                        scene.cameraShake(5, 1000);
                         music.sonar.play()
                     } else {                    // If the target has been acquired
-
+                        this.getAnimation("walk").play();
                     }
                 }
 
@@ -394,8 +393,20 @@ class Brimnem extends Entity {
                     if (foundEntity == Player.getEntity()) { onPlayerFound();} else if (this.targetFound) {
                         // If target acquired before, stop aggression
                         this.targetFound = false;
+                        this.getAnimation("idle").play();
                     }
                 }
+            }
+            // Follow if target acquired
+            let spr = obj.getHitbox().getSprite();
+            let plr = Player.getPlayerSprite();
+            if (this.targetFound) {
+                let vd = Math.sign(plr.x - spr.x);
+                spr.vx = 20 * vd;
+                this.getAnimation("idle").flipXSet(vd == -1);
+                this.getAnimation("walk").flipXSet(vd == -1);
+            } else {
+                spr.vx = 0;
             }
         })
 

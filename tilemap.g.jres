@@ -166,6 +166,42 @@
         "tilemapTile": true,
         "displayName": "spawn_brimnem"
     },
+    "tile30": {
+        "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsAALAOAACwCwAAsAsAALAMAADgDgAAsA4AALALAADACwAAsA4AAOALAADACwAAsAsAAMAOAACwDAAA4AsAAOAMAACwCwAAsAsAAOAOAADgDgAA4A4AALALAACwCwAA4AsAAOAOAADgCwAAsAvrvLu86+y7vA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "RustedShelfEmpty"
+    },
+    "tile28": {
+        "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsAALAOAACwCyAisgsAALAMAgLgDgAAsA4gILILAADACwAAsA4AAOALAADACwAAsAsAAMAOAACwDAAA4AsAAOAMAACwCwAAsAsAAOAOAADgDgAA4A4AALALAACwCwAA4AsAAOAOAADgCwAAsAvrvLu86+y7vA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "RustedShelfRandom0"
+    },
+    "tile29": {
+        "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsAALAOACK0CwAAsAsAQrIMAMzsDgBCsg4AzLwLACTCCwDMvA4AAOALAMzMCwAAsAsAAMAOAB6xDAAA4AsAAOAMAKq6CwAesQsAquoOAADgDgCq6g4AYLYLAKq6CwBg5gsAAOAOAADgCwAAsAvrvLu86+y7vA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "RustedShelfItem4"
+    },
+    "tile31": {
+        "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsAALAOgIa4Cw4RsQuAaLYMHqDhDoBotg4eoLELgIbICw4RsQ4AAOALAADACwAesQsAAMAOAB6xDFCo6gsAAOAMgIW6CwCZuQugWOgOkIbmDqCK5Q6QaLgLAACwCwCZ6QsAAOAOAADgCwAAsAvrvLu86+y7vA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "RustedShelfItem3"
+    },
+    "tile32": {
+        "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsABLAOAACwC0RAtAsAALBMQATgDgAAsA5EQLQLsLDAC8AEsA6lqusLEAzAC8rLuwsBAMAOwKuwHAAA4AsAyuAMAACwCwCwugsAJe0OAADgDhDB7A4AALALEB29CwAA4AsQwewOAADgCwAAsAvrvLu86+y7vA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "RustedShelfItem1"
+    },
+    "tile33": {
+        "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsAALAOAACwCwAAsAsA7rIMAADhDgAuvg4AELELAOLOCwARsQ4A7u4LABDBCwAAsAsAAM4OAACwDAAQ7gsA7ugMAACxCwCOvgsAAOAOAO7oDgB35w4AALALAHe3CwAA4AsAd+cOAADgCwAAsAvrvLu86+y7vA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "RustedShelfItem2"
+    },
     "level1": {
         "id": "level1",
         "mimeType": "application/mkcd-tilemap",
@@ -210,7 +246,10 @@
             "myTiles.tile16",
             "myTiles.tile17",
             "myTiles.tile26",
-            "myTiles.tile27"
+            "myTiles.tile27",
+            "myTiles.tile28",
+            "myTiles.tile29",
+            "myTiles.tile30"
         ],
         "displayName": "level2"
     },
