@@ -26,12 +26,13 @@ abstract class MusicImage {
         // Loop through columns
         for (let cx = 0; cx < toplay.width; cx++) {
             // Loop through tracks
-            for (let cto = 0; cto < tracks+tracks*scale; cto += scale) {
+            for (let cto = 0; cto < tracks+tracks*scale; cto += scale + 1) {
                 // Get note to play (loop through rows)
                 let notePitch = 0;
                 for (let i = 0; i < scale; i++) {
                     let cp = toplay.getPixel(cx, i+cto);
                     if (cp != 0) {
+                        console.logValue("val", cto);
                         notePitch = 988-(i*(857/scale));
                         break
                     }
@@ -70,7 +71,7 @@ abstract class MusicImage {
 
     public static main() {
         game.forever(function() {
-            MusicImage.playImage(assets.image`musicTestMultitrack`, 20, 2);
+            MusicImage.playImage(assets.image`musicTestMultitrack`, 16, 2);
         });
     }
 }
