@@ -71,7 +71,7 @@ abstract class MusicImage {
 
     public static main() {
         game.forever(function() {
-            MusicImage.playImage(assets.image`musicTestMultitrack`, 16, 2);
+            MusicImage.playImage(assets.image`music2`, 16, 1);
         });
     }
 }

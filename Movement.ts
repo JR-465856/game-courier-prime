@@ -1,4 +1,17 @@
 abstract class Movement {
+    private static doWalkAnim = true;
+    private static canJump = true;
+
+    /* Set whether to play the walking animation or not */
+    private static setDoWalkAnim(doWalkAnim: boolean) { Movement.doWalkAnim = doWalkAnim;}
+    /* Get whether to play the walking animation or not */
+    private static getDoWalkAnim() { return Movement.doWalkAnim;}
+
+    /* Set whether to be able to jump or not */
+    private static setCanJump(canJump: boolean) { Movement.canJump = canJump; }
+    /* Get whether to be able to jump or not */
+    private static getCanJump() { return Movement.canJump;}
+
     public static main() {
         /*                    | ------- |
                               | PRESSED |
@@ -7,7 +20,7 @@ abstract class Movement {
 
         /* Left */
         Controls.listen(Controls.Button.left, Controls.ButtonMode.press, function() {
-            Player.getEntity().getAnimation("walk").play();
+            if (Movement.doWalkAnim) Player.getEntity().getAnimation("walk").play();
             control.runInParallel(function () {
                 while (Controls.left.pressed && Controls.canMove) {
                     Player.getPlayerSprite().vx = -25;
@@ -17,7 +30,7 @@ abstract class Movement {
         })
         /* Right */
         Controls.listen(Controls.Button.right, Controls.ButtonMode.press, function () {
-            Player.getEntity().getAnimation("walk").play();
+            if (Movement.doWalkAnim) Player.getEntity().getAnimation("walk").play();
             control.runInParallel(function () {
                 while (Controls.right.pressed && Controls.canMove) {
                     Player.getPlayerSprite().vx = 25;
@@ -27,7 +40,7 @@ abstract class Movement {
         })
         /* Up */
         Controls.listen(Controls.Button.up, Controls.ButtonMode.press, function () {
-            if (Controls.canMove && Player.getPlayerSprite().isHittingTile(CollisionDirection.Bottom)) Player.getPlayerSprite().vy = -85;
+            if (Movement.canJump && Controls.canMove && Player.getPlayerSprite().isHittingTile(CollisionDirection.Bottom)) Player.getPlayerSprite().vy = -85;
         })
 
         /*                    | -------- |

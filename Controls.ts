@@ -23,7 +23,7 @@ abstract class Controls {
     }
 
     /* Any movement pressed */
-    public static moving() {
+    public static getAnyDPadPressed() {
         return Controls.up.pressed
                || Controls.down.pressed
                || Controls.left.pressed
