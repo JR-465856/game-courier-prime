@@ -375,7 +375,7 @@ class Brimnem extends Entity {
 
                 // Cast for player (right)
                 foundEntity = obj.castForEntity(
-                    0 * (Math.PI / 180),
+                    0,
                     obj.getPosition().x,
                     obj.getPosition().y,
                     80,
@@ -384,7 +384,7 @@ class Brimnem extends Entity {
                 if (foundEntity == Player.getEntity()) { onPlayerFound();} else {
                     // Cast for player (left)
                     foundEntity = obj.castForEntity(
-                        180 * (Math.PI / 180),
+                        Math.PI,
                         obj.getPosition().x,
                         obj.getPosition().y,
                         80,
