@@ -6,6 +6,7 @@ abstract class InternalMap {
         assets.image`grass4`
     ];
     public static mapEffects: Array<Sprite> = [];
+    public static mapEntityEffects: Array<Entity> = [];
     private static grassKind       = SpriteKind.create();
     private static waterKind       = SpriteKind.create();
     private static levelPortalKind = SpriteKind.create();
@@ -15,7 +16,11 @@ abstract class InternalMap {
     public static getLevel() { return InternalMap.currentLevel;}
 
     public static getGrassKind() { return InternalMap.grassKind;}
-    public static clearEffects() { for (let i of InternalMap.mapEffects) i.destroy();}
+
+    public static clearEffects() {
+        for (let i of InternalMap.mapEffects) i.destroy();
+        for (let i of InternalMap.mapEntityEffects) i.destroySprite();
+    }
     
     /* Spawn player */
     public static spawnPlayer(tileReplace: Image) {
@@ -84,6 +89,28 @@ abstract class InternalMap {
             tiles.placeOnTile(spr, i);
             InternalMap.mapEffects.push(spr);
         }
+        /* Randomize rusted shelves */
+        for (let i of tiles.getTilesByType(assets.tile`RustedShelfRandom`)) {
+            let ran = Math.randomRange(1, 10);
+            switch (ran) {
+                case 1:
+                    tiles.setTileAt(i, assets.tile`RustedShelfItem1`); break;
+                case 2:
+                    tiles.setTileAt(i, assets.tile`RustedShelfItem2`); break;
+                case 3:
+                    tiles.setTileAt(i, assets.tile`RustedShelfItem3`); break;
+                case 4:
+                    tiles.setTileAt(i, assets.tile`RustedShelfItem4`); break;
+                default:
+                    tiles.setTileAt(i, assets.tile`RustedShelfEmpty`); break;
+            }
+        }
+        /*** PIPE LEAKS ***/
+        /* Water leaks */
+        for (let i of tiles.getTilesByType(assets.tile`rustedpipecenterleakwater`)) {
+            
+        }
+        /*** __________ ***/
     }
 
     /* Level 1 */

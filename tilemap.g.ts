@@ -59,8 +59,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile30 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile28 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile29 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile31 = image.ofBuffer(hex``);
@@ -77,8 +75,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile34 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile39 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile38 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile40 = image.ofBuffer(hex``);
@@ -88,6 +84,10 @@ namespace myTiles {
     export const tile42 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile43 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile28 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile39 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -226,8 +226,6 @@ namespace myTiles {
             case "tile27":return tile27;
             case "RustedShelfEmpty":
             case "tile30":return tile30;
-            case "RustedShelfRandom0":
-            case "tile28":return tile28;
             case "RustedShelfItem4":
             case "tile29":return tile29;
             case "RustedShelfItem3":
@@ -244,8 +242,6 @@ namespace myTiles {
             case "tile37":return tile37;
             case "rustedpipecenterleaksteam":
             case "tile34":return tile34;
-            case "rustedpipecenterleakwater1":
-            case "tile39":return tile39;
             case "rustedpipecenterleakhotcoolant":
             case "tile38":return tile38;
             case "rustedpipecenterleakempty":
@@ -256,6 +252,10 @@ namespace myTiles {
             case "tile42":return tile42;
             case "MineRayPickup":
             case "tile43":return tile43;
+            case "RustedShelfRandom":
+            case "tile28":return tile28;
+            case "rustedpipecenterleakwater":
+            case "tile39":return tile39;
         }
         return null;
     })

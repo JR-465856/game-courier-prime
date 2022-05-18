@@ -172,12 +172,6 @@
         "tilemapTile": true,
         "displayName": "RustedShelfEmpty"
     },
-    "tile28": {
-        "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsAALAOAACwCyAisgsAALAMAgLgDgAAsA4gILILAADACwAAsA4AAOALAADACwAAsAsAAMAOAACwDAAA4AsAAOAMAACwCwAAsAsAAOAOAADgDgAA4A4AALALAACwCwAA4AsAAOAOAADgCwAAsAvrvLu86+y7vA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "RustedShelfRandom0"
-    },
     "tile29": {
         "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsAALAOACK0CwAAsAsAQrIMAMzsDgBCsg4AzLwLACTCCwDMvA4AAOALAMzMCwAAsAsAAMAOAB6xDAAA4AsAAOAMAKq6CwAesQsAquoOAADgDgCq6g4AYLYLAKq6CwBg5gsAAOAOAADgCwAAsAvrvLu86+y7vA==",
         "mimeType": "image/x-mkcd-f4",
@@ -226,12 +220,6 @@
         "tilemapTile": true,
         "displayName": "rustedpipecenterleaksteam"
     },
-    "tile39": {
-        "data": "hwQQABAAAAAAALyMvMsAAADA/L7suwwAAADru/u7AAAAAOy8u8sAAAAA+7/7yAAAAAC8uP+8AAAAAPv/6L8AAAAAuPv/yAAAAADs/7+/AAAAAIuPy8sAAAAA+//7ywAAAAC7i+u8AAAAAOy4vL4AAAAAvsu/7AAAAMDO+7u7DAAAAOy7y7sAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "rustedpipecenterleakwater1"
-    },
     "tile38": {
         "data": "hwQQABAAAAAAALwsvMsAAADA/G7suwwAAADru/u7AAAAAOy8u8IAAAAA+7/ywgAAAAC8tv+2AAAAAPL/4r8AAAAAsvv2wgAAAADs/7+yAAAAAGtvy8sAAAAA+//yywAAAAC7K+u8AAAAAOwivL4AAAAAvmu/7AAAAMDO+7u7DAAAAOy7y7sAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -261,6 +249,18 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "MineRayPickup"
+    },
+    "tile28": {
+        "data": "hwQQABAAAAC7y8u+u+7LvAAA4AsAALAOAACwCyAisgsAALAMAgLgDgAAsA4gILILAADACwAAsA4AAOALAADACwAAsAsAAMAOAACwDAAA4AsAAOAMAACwCwAAsAsAAOAOAADgDgAA4A4AALALAACwCwAA4AsAAOAOAADgCwAAsAvrvLu86+y7vA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "RustedShelfRandom"
+    },
+    "tile39": {
+        "data": "hwQQABAAAAAAALyMvMsAAADA/L7suwwAAADru/u7AAAAAOy8u8sAAAAA+7/7yAAAAAC8uP+8AAAAAPv/6L8AAAAAuPv/yAAAAADs/7+/AAAAAIuPy8sAAAAA+//7ywAAAAC7i+u8AAAAAOy4vL4AAAAAvsu/7AAAAMDO+7u7DAAAAOy7y7sAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "rustedpipecenterleakwater"
     },
     "level1": {
         "id": "level1",

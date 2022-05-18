@@ -64,7 +64,7 @@ abstract class Entity {
     // WARNING: Ticking is by default disabled in the overridable method onDestroy.
     //          If onDestroy is overridden but ticking is never disabled in it,
     //          it will open up opportunies for lag and other undesirable problems.
-    protected onDestroy(): void { this.sprite.destroy(); this.doTick = false; }
+    protected onDestroy(): void { this.sprite.destroy(); this.doTick = false;}
 
     //                          HITBOX FUNCTIONS
     // Get Hitbox
@@ -308,7 +308,7 @@ namespace Entity {
 
         // Main position loop
         public static hitboxPositionLoop() {
-            Entity.Hitbox.hitboxList.forEach(function (obj, index) {
+            Entity.Hitbox.hitboxList.forEach(function(obj, index) {
                 if ((obj == null) || (obj == undefined) || (obj.getParent() == null) || (obj.getParent() == undefined)) { Entity.Hitbox.hitboxList.splice(index, 1); return; }
                 obj.getParent().x = obj.getSprite().x + obj.getParentOffset().x;
                 obj.getParent().y = obj.getSprite().y + obj.getParentOffset().y;
@@ -359,7 +359,7 @@ class Brimnem extends Entity {
         // On tick
         this.setTicking(true);
         this.onTick(function(obj) {
-            // Check if the player is in sight
+            // Check if the player is in sight every second
             if ((obj.getTickAge() % 20) == 0) {
                 // Function for when the player has been found
                 let foundEntity = null;
@@ -416,6 +416,104 @@ class Brimnem extends Entity {
     // On destroy
     // @Override
     protected onDestroy() {
+        this.sprite.destroy();
+        this.doTick = false;
+    }
+}
 
+//                              PARTICLE EMITTER
+class ParticleEmitter extends Entity {
+    protected static particleSpriteKind = SpriteKind.create();
+    protected curParticleArray: Array<{particleSprite: Sprite, lifetime: number}> = [];
+    // All angle measures are in radians
+    // All time measures are in ticks
+    public active            = false; // Automatically generate particles by ticks
+    public particle          = img`
+        5 . 5 . 5
+        . 5 5 5 .
+        5 5 5 5 5
+        . 5 5 5 .
+        5 . 5 . 5
+    ` // Image of the particle
+    public emitRate          = 10; // How many ticks between every time particle(s) are generated
+    public particlesPerEmit  = 1; // How many particles to create per tick
+    public angle             = Math.PI/2; // Initial angle of the particles
+    public speed             = 10; // Initial speed of the particles
+    public lifetime          = 200; // How many ticks the particles will survive for
+    public spreadAngle       = Math.PI/18; // Maximum angle to spread particles at
+    public acceleration      = 0; // Speed to accelerate particles at
+    public accelerationAngle = 0; // Angle to accelerate particles at
+    public doWallCollisions  = false; // Whether to collide with walls or not
+    public doSpriteGhost     = true; // Whether to ghost particle sprites or not
+
+    // Constructor
+    constructor(
+        active           : boolean,
+        particle         : Image,
+        emitRate         : number,
+        particlesPerEmit : number,
+        angle            : number,
+        speed            : number,
+        lifetime         : number,
+        spreadAngle      : number,
+        acceleration     : number,
+        accelerationAngle: number,
+        doWallCollisions : boolean,
+        doSpriteGhost    : boolean
+    ) {
+        super();
+
+        // Set properties
+        this.active            = active;
+        this.particle          = particle;
+        this.emitRate          = emitRate;
+        this.particlesPerEmit  = particlesPerEmit;
+        this.angle             = angle;
+        this.speed             = speed;
+        this.lifetime          = lifetime;
+        this.spreadAngle       = spreadAngle;
+        this.acceleration      = acceleration;
+        this.accelerationAngle = accelerationAngle;
+        this.doWallCollisions  = doWallCollisions;
+        this.doSpriteGhost     = doSpriteGhost;
+
+        // On Tick
+        this.doTick = true;
+        this.onTick(function(thisEmitter) {
+            // Emit particles if enabled and emit rate matches with current tick age
+            if (this.active && (thisEmitter.getTickAge() % this.emitRate) == 0) {
+                this.emit(this.particlesPerEmit);
+            }
+            // Clear particles with no lifetime left
+            this.curParticleArray.forEach(function (obj: {particleSprite: Sprite, lifetime: number}, index: number) {
+                if (obj == null) return;
+                obj.lifetime += -1;
+                if (obj.lifetime <= 0) {
+                    obj.particleSprite.destroy();
+                    this.curParticleArray[index] = null;
+                }
+            });
+        });
+
+        return this;
+    }
+
+    // Emit particle
+    public emit(particleAmount: number) {
+        for (let i = 1; i <= particleAmount; i++) {
+            let particleSprite = sprites.create(this.particle, ParticleEmitter.particleSpriteKind);
+            // Set flags
+            particleSprite.setFlag(SpriteFlag.GhostThroughWalls, this.doWallCollisions);
+            particleSprite.setFlag(SpriteFlag.Ghost, this.doSpriteGhost);
+            // Set velocity with spread angle
+            let fva = this.angle + Math.randomRange(this.spreadAngle * -1, this.spreadAngle)
+            let vx = Math.cos(fva)*this.speed; particleSprite.vx = vx;
+            let vy = Math.sin(fva)*this.speed; particleSprite.vy = vy;
+            // Set acceleration
+            let ax = Math.cos(this.accelerationAngle) * this.acceleration; particleSprite.ax = ax;
+            let ay = Math.sin(this.accelerationAngle) * this.acceleration; particleSprite.ay = ay;
+            // Push to particle array
+            this.curParticleArray.push({particleSprite: particleSprite, lifetime: this.lifetime});
+        }
     }
 }
