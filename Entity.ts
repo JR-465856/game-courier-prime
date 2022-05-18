@@ -421,6 +421,12 @@ class Brimnem extends Entity {
     }
 }
 
+
+
+
+
+// TODO: Allow for the particles to be accessed to do other physics and such
+// TODO: Make it possible to change the sprite kind of the particles
 //                              PARTICLE EMITTER
 class ParticleEmitter extends Entity {
     protected static particleSpriteKind = SpriteKind.create();
