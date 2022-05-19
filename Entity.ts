@@ -426,6 +426,8 @@ class Brimnem extends Entity {
 
 
 //                              PARTICLE EMITTER
+// BROKEN, DO NOT USE
+/*
 class ParticleEmitter extends Entity {
     protected static globalParticleSpriteKind = SpriteKind.create();
     protected particleSpriteKind = ParticleEmitter.globalParticleSpriteKind;
@@ -473,6 +475,9 @@ class ParticleEmitter extends Entity {
     ) {
         super();
 
+        this.curParticleArray = [];
+        this.onParticleEmittedArray = [];
+
         // Set properties
         this.active            = active;
         this.particle          = particle;
@@ -498,7 +503,7 @@ class ParticleEmitter extends Entity {
             }
             // Clear particles with no lifetime left
             this.curParticleArray.forEach(function (obj: {particleSprite: Sprite, lifetime: number}, index: number) {
-                if (obj == null) return;
+                if (obj == null || obj == undefined) return;
                 obj.lifetime += -1;
                 if (obj.lifetime <= 0) {
                     obj.particleSprite.destroy();
@@ -549,3 +554,4 @@ class ParticleEmitter extends Entity {
     // Set sprite kind of new particles to default particle sprite kind
     public defaultSpriteKind() { this.particleSpriteKind = ParticleEmitter.globalParticleSpriteKind;}
 }
+*/

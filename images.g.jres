@@ -74,6 +74,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "musicTestMultitrack"
     },
+    "image16": {
+        "data": "hwQCAAIAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "2"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

@@ -528,6 +528,11 @@ ffffffffffffffffffffffffffffcccccccccccccccfffffffffffffffffffffffffffffffffffff
 ................
 3333333333333456
 `;
+            case "image16":
+            case "2":return img`
+. . 
+. . 
+`;
         }
         return null;
     })

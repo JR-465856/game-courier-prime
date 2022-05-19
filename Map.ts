@@ -105,13 +105,6 @@ abstract class InternalMap {
                     tiles.setTileAt(i, assets.tile`RustedShelfEmpty`); break;
             }
         }
-        /*** PIPE LEAKS ***/
-        // TODO: Add particle emitters for the map, especially pipe leaks
-        /* Water leaks */
-        for (let i of tiles.getTilesByType(assets.tile`rustedpipecenterleakwater`)) {
-            
-        }
-        /*** __________ ***/
     }
 
     /* Level 1 */
