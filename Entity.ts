@@ -451,6 +451,8 @@ class ParticleEmitter extends Entity {
     public accelerationAngle = 0; // Angle to accelerate particles at
     public doWallCollisions  = false; // Whether to collide with walls or not
     public doSpriteGhost     = true; // Whether to ghost particle sprites or not
+    public px                = 0;
+    public py                = 0;
 
     // Constructor
     constructor(
@@ -465,7 +467,9 @@ class ParticleEmitter extends Entity {
         acceleration     : number,
         accelerationAngle: number,
         doWallCollisions : boolean,
-        doSpriteGhost    : boolean
+        doSpriteGhost    : boolean,
+        px               : number,
+        py               : number
     ) {
         super();
 
@@ -482,6 +486,8 @@ class ParticleEmitter extends Entity {
         this.accelerationAngle = accelerationAngle;
         this.doWallCollisions  = doWallCollisions;
         this.doSpriteGhost     = doSpriteGhost;
+        this.py                = px;
+        this.py                = py;
 
         // On Tick
         this.doTick = true;
@@ -511,13 +517,20 @@ class ParticleEmitter extends Entity {
             // Set flags
             particleSprite.setFlag(SpriteFlag.GhostThroughWalls, this.doWallCollisions);
             particleSprite.setFlag(SpriteFlag.Ghost, this.doSpriteGhost);
+            // Set position
+            particleSprite.x = this.px;
+            particleSprite.y = this.py;
             // Set velocity with spread angle
             let fva = this.angle + Math.randomRange(this.spreadAngle * -1, this.spreadAngle)
             let vx = Math.cos(fva)*this.speed; particleSprite.vx = vx;
             let vy = Math.sin(fva)*this.speed; particleSprite.vy = vy;
+            particleSprite.vx = vx;
+            particleSprite.vy = vy;
             // Set acceleration
             let ax = Math.cos(this.accelerationAngle) * this.acceleration; particleSprite.ax = ax;
             let ay = Math.sin(this.accelerationAngle) * this.acceleration; particleSprite.ay = ay;
+            particleSprite.ax = ax;
+            particleSprite.ay = ay;
             // Push to particle array and run onParticleEmitted functions
             this.curParticleArray.push({particleSprite: particleSprite, lifetime: this.lifetime});
             this.onParticleEmittedArray.forEach(function(obj: (particleSprite: Sprite) => void) { obj(particleSprite);});
