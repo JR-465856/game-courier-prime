@@ -425,12 +425,12 @@ class Brimnem extends Entity {
 
 
 
-// TODO: Allow for the particles to be accessed to do other physics and such
-// TODO: Make it possible to change the sprite kind of the particles
 //                              PARTICLE EMITTER
 class ParticleEmitter extends Entity {
-    protected static particleSpriteKind = SpriteKind.create();
+    protected static globalParticleSpriteKind = SpriteKind.create();
+    protected particleSpriteKind = ParticleEmitter.globalParticleSpriteKind;
     protected curParticleArray: Array<{particleSprite: Sprite, lifetime: number}> = [];
+    protected onParticleEmittedArray: Array<(particleSprite: Sprite) => void> = [];
     // All angle measures are in radians
     // All time measures are in ticks
     public active            = false; // Automatically generate particles by ticks
@@ -507,7 +507,7 @@ class ParticleEmitter extends Entity {
     // Emit particle
     public emit(particleAmount: number) {
         for (let i = 1; i <= particleAmount; i++) {
-            let particleSprite = sprites.create(this.particle, ParticleEmitter.particleSpriteKind);
+            let particleSprite = sprites.create(this.particle, this.particleSpriteKind);
             // Set flags
             particleSprite.setFlag(SpriteFlag.GhostThroughWalls, this.doWallCollisions);
             particleSprite.setFlag(SpriteFlag.Ghost, this.doSpriteGhost);
@@ -518,8 +518,21 @@ class ParticleEmitter extends Entity {
             // Set acceleration
             let ax = Math.cos(this.accelerationAngle) * this.acceleration; particleSprite.ax = ax;
             let ay = Math.sin(this.accelerationAngle) * this.acceleration; particleSprite.ay = ay;
-            // Push to particle array
+            // Push to particle array and run onParticleEmitted functions
             this.curParticleArray.push({particleSprite: particleSprite, lifetime: this.lifetime});
+            this.onParticleEmittedArray.forEach(function(obj: (particleSprite: Sprite) => void) { obj(particleSprite);});
         }
     }
+
+    // Get all active particle sprites
+    public getActiveParticleSprites() { return this.curParticleArray;}
+    // On particle emitted
+    public onParticleEmitted(newFunc: () => void) { this.onParticleEmittedArray.push(newFunc);}
+
+    // Set sprite kind of new particles
+    public setSpriteKind(newSpriteKind: number) { this.particleSpriteKind = newSpriteKind;}
+    // Get sprite kind of new particles
+    public getSpriteKind() { return this.particleSpriteKind;}
+    // Set sprite kind of new particles to default particle sprite kind
+    public defaultSpriteKind() { this.particleSpriteKind = ParticleEmitter.globalParticleSpriteKind;}
 }
