@@ -23,13 +23,15 @@
         "Movement.ts",
         "GameMap.ts",
         "Entity.ts",
-        "Hashmap.ts"
+        "Hashmap.ts",
+        "RunHandler.ts",
+        "AdvancedPhysics.ts"
     ],
     "testFiles": [
         "test.ts"
     ],
     "targetVersions": {
-        "target": "1.8.23",
+        "target": "1.8.29",
         "targetId": "arcade"
     },
     "supportedTargets": [
